@@ -12,6 +12,7 @@ SRCREV = "1b077af62d83d53c34b1bde8bad6648149d5edf9"
 
 PV .= "+git${SRCPV}"
 LK_REL = "1.0.18"
+PR = "r1"
 
 SRC_URI = " \
     git://github.com/sctp/lksctp-tools.git \
@@ -65,5 +66,6 @@ FILES_${PN}-dev += " \
 
 FILES_${PN}-utils = "${bindir}/*"
 
+RRECOMMENDS_${PN} += "kernel-module-sctp"
 RRECOMMENDS_${PN}-utils += "kernel-module-sctp"
 RRECOMMENDS_${PN}-ptest += "kernel-module-sctp"
