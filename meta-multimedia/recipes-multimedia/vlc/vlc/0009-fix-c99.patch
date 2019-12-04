@@ -1,0 +1,47 @@
+diff -ur vlc-3.0.6/src/misc/fourcc_gen.c vlc-3.0.6-new/src/misc/fourcc_gen.c
+--- vlc-3.0.6/src/misc/fourcc_gen.c	2017-11-24 16:29:18.000000000 +0100
++++ vlc-3.0.6-new/src/misc/fourcc_gen.c	2019-12-04 15:41:38.755870344 +0100
+@@ -66,13 +66,14 @@
+ 
+ static void process_list(const char *name, const staticentry_t *list, size_t n)
+ {
++    size_t i;
+     struct entry *entries = malloc(sizeof (*entries) * n);
+     if (entries == NULL)
+         abort();
+ 
+     const staticentry_t *klass = NULL;
+ 
+-    for (size_t i = 0; i < n; i++)
++    for (i = 0; i < n; i++)
+     {
+         if (list[i].klass)
+             klass = &list[i];
+@@ -92,7 +93,7 @@
+     qsort(entries, n, sizeof (*entries), cmp_entry);
+ 
+     size_t dups = 0;
+-    for (size_t i = 1; i < n; i++)
++    for (i = 1; i < n; i++)
+         if (!memcmp(entries[i - 1].alias, entries[i].alias, 4)
+          && memcmp(entries[i - 1].fourcc, entries[i].fourcc, 4))
+         {
+@@ -106,7 +107,7 @@
+         exit(1);
+ 
+     printf("static const struct fourcc_mapping mapping_%s[] = {\n", name);
+-    for (size_t i = 0; i < n; i++)
++    for (i = 0; i < n; i++)
+     {
+         if (!memcmp(entries[i].fourcc, entries[i].alias, 4))
+             continue;
+@@ -118,7 +119,7 @@
+     }
+     puts("};");
+     printf("static const struct fourcc_desc desc_%s[] = {\n", name);
+-    for (size_t i = 0; i < n; i++)
++    for (i = 0; i < n; i++)
+     {
+         if (entries[i].desc == NULL)
+             continue;
+Only in vlc-3.0.6-new/src/misc: .fourcc_gen.c.un~
